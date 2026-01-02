@@ -1,0 +1,27 @@
+{
+  "name": "story-forge",
+  "version": "0.0.0",
+  "description": "Create stories using AI",
+  "keywords": [
+    "Story",
+    "Writing",
+    "AI",
+    "World",
+    "Building"
+  ],
+  "homepage": "https://github.com/lewismoten/story-forge#readme",
+  "bugs": {
+    "url": "https://github.com/lewismoten/story-forge/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lewismoten/story-forge.git"
+  },
+  "license": "ISC",
+  "author": "Lewis Edward Moten III",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
