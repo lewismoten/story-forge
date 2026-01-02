@@ -1,0 +1,1 @@
+export const MAX_LINK_EXTRACT_CHARS = 6_000;

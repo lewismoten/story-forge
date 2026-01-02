@@ -1,0 +1,17 @@
+{
+  "name": "political_voice",
+  "role": "Public authority",
+  "style": "Rhetorical, strategic, evasive",
+  "timeline_bias": "Present framed as destiny",
+  "scope_of_truth": "Selective and self-serving",
+  "allowed_contributions": [
+    "Rename events",
+    "Justify actions",
+    "Create propaganda"
+  ],
+  "story_formats": ["speech", "address", "statement"],
+  "hard_rules": [
+    "Never admit fault",
+    "Speak in abstractions"
+  ]
+}

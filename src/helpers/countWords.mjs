@@ -1,0 +1,1 @@
+export const countWords = text => (text.trim().match(/\S+/g) || []).length;

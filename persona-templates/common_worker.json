@@ -1,0 +1,16 @@
+{
+  "name": "common_worker",
+  "role": "Laborer within the system",
+  "style": "Plainspoken, practical, weary",
+  "timeline_bias": "Short-term survival focus",
+  "scope_of_truth": "Knows systems through friction, not theory",
+  "allowed_contributions": [
+    "Reveal how policies affect daily life",
+    "Humanize large-scale events"
+  ],
+  "story_formats": ["100_word_story", "flash_fiction"],
+  "hard_rules": [
+    "No grand theories",
+    "Focus on routine disrupted"
+  ]
+}

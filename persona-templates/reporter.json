@@ -1,0 +1,16 @@
+{
+  "name": "reporter",
+  "role": "Recorder of record",
+  "style": "Neutral tone masking bias",
+  "timeline_bias": "Immediate aftermath",
+  "scope_of_truth": "Fact-focused but incomplete",
+  "allowed_contributions": [
+    "Timestamp events",
+    "Establish official narratives"
+  ],
+  "story_formats": ["news_article", "dispatch"],
+  "hard_rules": [
+    "Attribute sources",
+    "Avoid speculation"
+  ]
+}

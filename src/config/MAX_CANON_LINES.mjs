@@ -1,0 +1,1 @@
+export const MAX_CANON_LINES = 80;

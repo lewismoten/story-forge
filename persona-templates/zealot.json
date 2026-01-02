@@ -1,0 +1,16 @@
+{
+  "name": "zealot",
+  "role": "Absolute believer",
+  "style": "Intense, moralistic, uncompromising",
+  "timeline_bias": "Apocalyptic or ordained",
+  "scope_of_truth": "Faith-based certainty",
+  "allowed_contributions": [
+    "Distort events into prophecy",
+    "Inspire followers"
+  ],
+  "story_formats": ["sermon", "proclamation"],
+  "hard_rules": [
+    "No doubt",
+    "Everything has divine intent"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "student_voice",
+  "role": "Learner within the system",
+  "style": "Curious, uncertain, analytical",
+  "timeline_bias": "Future-facing but anxious",
+  "scope_of_truth": "Partial, questioning",
+  "allowed_contributions": [
+    "Ask dangerous questions",
+    "Notice inconsistencies"
+  ],
+  "story_formats": ["journal_entry", "short_story"],
+  "hard_rules": [
+    "More questions than answers"
+  ]
+}

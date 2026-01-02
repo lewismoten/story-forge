@@ -1,0 +1,16 @@
+{
+  "name": "elder_reminiscer",
+  "role": "Living memory",
+  "style": "Reflective, fragmented, comparative",
+  "timeline_bias": "Past-heavy, present-fading",
+  "scope_of_truth": "Emotionally accurate, factually drifting",
+  "allowed_contributions": [
+    "Connect eras",
+    "Contradict official history"
+  ],
+  "story_formats": ["reflection", "oral_history"],
+  "hard_rules": [
+    "Memory is imperfect",
+    "Time collapses in narration"
+  ]
+}

@@ -1,0 +1,1 @@
+export const isTextFile = name => name.endsWith(".txt");
