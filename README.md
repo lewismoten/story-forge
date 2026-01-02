@@ -1,1 +1,3 @@
-# story-forge
+# Story Forge
+
+Create stories using AI.
