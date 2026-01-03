@@ -22,10 +22,10 @@ import { STORY_DIR } from "./config/STORY_DIR.mjs";
 import { DEEPAI_API_CONCURRENCY} from './config/DEEPAI_API_CONCURRENCY.mjs';
 
 import { downloadToFile } from './helpers/downloadToFile.mjs';
-import { listSubdirs } from "./helpers/listSubdirs.mjs";
 import { listJsonFiles } from "./helpers/listJsonFiles.mjs";
 import { runPool } from "./helpers/runPool.mjs";
 import { existsA } from "./helpers/exists.mjs";
+import { findStoryDirs } from "./helpers/findStoryDirs.mjs";
 
 import { findExistingImageSameBasename} from './images/findExistingImageSameBasename.mjs';
 import { extFromContentType } from "./images/extFromContentType.mjs";
@@ -38,7 +38,7 @@ async function main() {
     process.exit(1);
   }
 
-  const personaDirs = await listSubdirs(STORY_DIR);
+  const personaDirs = await findStoryDirs(STORY_DIR);
   if (!personaDirs.length) {
     console.log(`No persona subfolders found in: ${STORY_DIR}`);
     return;
@@ -47,7 +47,7 @@ async function main() {
   // Collect work items: { personaDir, jsonPath }
   const work = [];
   for (const pDir of personaDirs) {
-    const jsonFiles = await listJsonFiles(pDir);
+    const jsonFiles = await listJsonFiles(pDir, "-story.json");
     for (const j of jsonFiles) {
       work.push({ personaDir: pDir, jsonPath: j });
     }
@@ -62,7 +62,7 @@ console.log(`Concurrency`, DEEPAI_API_CONCURRENCY);
   await runPool(
     work,
     async ({ personaDir, jsonPath }) => {
-      const base = path.basename(jsonPath, ".json");
+      const base = path.basename(jsonPath, ".json").replace(/-story$/, '');
       const existing = await findExistingImageSameBasename(personaDir, base);
       if (existing) {
         skipped++;
@@ -95,8 +95,9 @@ console.log(`Concurrency`, DEEPAI_API_CONCURRENCY);
         const tmpPath = path.join(personaDir, `${base}.tmpimg`);
         const dl = await downloadToFile(outputUrl, tmpPath);
         const ctExt = extFromContentType(dl.contentType);
-        const finalExt = ctExt || urlExt || ".jpg";
-        const finalPath = path.join(personaDir, base + finalExt);
+        let finalExt = ctExt || urlExt || ".jpg";
+        if(!finalExt.startsWith('.')) finalExt = `.${finalExt}`;
+        const finalPath = path.join(personaDir, `${base}-feature-image${finalExt}`);
         await fs.rename(tmpPath, finalPath);
 
         generated++;

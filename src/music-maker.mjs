@@ -7,7 +7,7 @@ import { STORY_DIR } from "./config/STORY_DIR.mjs";
 import { DEEPAI_API_CONCURRENCY} from './config/DEEPAI_API_CONCURRENCY.mjs';
 
 import { downloadToFile } from './helpers/downloadToFile.mjs';
-import { listSubdirs } from "./helpers/listSubdirs.mjs";
+import { findStoryDirs } from "./helpers/findStoryDirs.mjs";
 import { listJsonFiles } from "./helpers/listJsonFiles.mjs";
 import { runPool } from "./helpers/runPool.mjs";
 import { existsA } from "./helpers/exists.mjs";
@@ -26,16 +26,16 @@ async function main() {
     process.exit(1);
   }
 
-  const personaDirs = await listSubdirs(STORY_DIR);
+  const personaDirs = await findStoryDirs(STORY_DIR);
   if (!personaDirs.length) {
-    console.log(`No persona subfolders found in: ${STORY_DIR}`);
+    console.log(`No stories found in: ${STORY_DIR}`);
     return;
   }
 
   // Collect work items: { personaDir, jsonPath }
   const work = [];
   for (const pDir of personaDirs) {
-    const jsonFiles = await listJsonFiles(pDir);
+    const jsonFiles = await listJsonFiles(pDir, "-story.json");
     for (const j of jsonFiles) {
       work.push({ personaDir: pDir, jsonPath: j });
     }
@@ -50,7 +50,7 @@ async function main() {
   await runPool(
     work,
     async ({ personaDir, jsonPath }) => {
-      const base = path.basename(jsonPath, ".json");
+      const base = path.basename(jsonPath, ".json").replace(/-story$/, '');
       const existing = await findExistingAudioSameBasename(personaDir, base);
       if (existing) {
         skipped++;
@@ -87,17 +87,18 @@ async function main() {
         let dl;
         if(1===1) {
           const textPrompt = await promptGenerateAudio({ prompt, sound, title });
-          finalPath = path.join(personaDir, base + '.audio-prompt.txt');
+          finalPath = path.join(personaDir, base + '-song.audio-prompt.txt');
           writeText(finalPath, textPrompt);
           dl = {bytes: textPrompt.length};
         } else {
           const { outputUrl } = await deepaiGenerateAudio({ prompt, sound, title });
           const urlExt = audioExtFromUrl(outputUrl);
-          const tmpPath = path.join(personaDir, `${base}.tmpimg`);
+          const tmpPath = path.join(personaDir, `${base}-song.tmpmp3`);
           dl = await downloadToFile(outputUrl, tmpPath);
           const ctExt = extFromContentType(dl.contentType);
-          const finalExt = ctExt || urlExt || ".mp3";
-          finalPath = path.join(personaDir, base + finalExt);
+          let finalExt = ctExt || urlExt || ".mp3";
+          if(!finalExt.startsWith('.')) finalExt = `.${finalExt}`;
+          finalPath = path.join(personaDir, base + '-song' + finalExt);
           await fs.rename(tmpPath, finalPath);
         }
 
