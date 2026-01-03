@@ -17,6 +17,14 @@ generator using OpenAI Responses API.
   - Create images to go along with theme of each story
   - Images created as a batch for stories that are missing images
 
+# In Progress
+
+- Blogging (Wordpress)
+  - Upload images as media
+  - Post as multiple user accounts
+  - Use Title, Slugs, Featur Images, Tags, Categories
+  - Schedule posts in the future
+
 ## Future features
 Partial work is done for music generation. DeepAI has a model for music
 generation, but it doesn't appear to be expoed via an API.  
@@ -50,6 +58,44 @@ export DEEPAI_API_KEY="..."
 # Windows
 setx DEEPAI_API_KEY "..."
 ```
+
+### Wordpress
+
+Setup an application password.
+
+1. Go to `/wp-admin/` dashboard
+2. Go to `Users` menu
+3. Click the user
+4. Scroll down to `Application Passwords`
+5. Fill out `New Application Password Name`
+6. Click `Add Application Password`
+7. Copy the application password
+8. In the source code, got to your generated personas `/.storyforge/personas/{name}.json`
+9. Add a new `blogs` section with a named key and your credentials
+
+```json
+{ 
+  "blogs": {
+    "story-forge": {
+      "type": "wordpress",
+      "baseUrl": "https://example.com",
+      "username": "wordpress.user.name",
+      "appPassword": "abcd efgh ijkl mnop qrst uvwx"
+    }
+  }
+}
+```
+
+If you setup a wordpress blog on a shared hose, you may need to enable
+application passwords manually. 
+
+#### Hostinger
+1. Go to /wp-admin/ Dashboard
+2. Hover oer `Hostinger` on the menu
+3. Click `Tools`
+4. In the `Security` section
+5. Ensure `Disable application passwords` is off
+
 
 ## Usage
 
