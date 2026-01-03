@@ -17,6 +17,12 @@ generator using OpenAI Responses API.
   - Create images to go along with theme of each story
   - Images created as a batch for stories that are missing images
 
+## Future features
+Partial work is done for music generation. DeepAI has a model for music
+generation, but it doesn't appear to be expoed via an API.  
+For now, you may use the title, sound, and lyrics as a prompt to
+paste into your favorite music generator.
+
 ## Setup
 
 ### OpenAI

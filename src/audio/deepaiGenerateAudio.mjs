@@ -1,22 +1,21 @@
 import { DEEPAI_API_ENDPOINT } from "../config/DEEPAI_API_ENDPOINT.mjs";
 import { DEEPAI_API_KEY } from "../config/DEEPAI_API_KEY.mjs";
 
-export const deepaiGenerateImage = async ({ prompt, style }) => {
+export const deepaiGenerateAudio = async ({ prompt, sound }) => {
   const form = new FormData();
-  form.append("text", prompt);
-  if (style && String(style).trim()) {
-    form.append("style", String(style).trim());
-  }
-  // width,height 128-1536 (default 512), multiples of 32; keep between 256-700
-  form.append("width",  512);
-  form.append("height",  512);
-  // image_generator_version: (standard), hd, genius, super_genius
-  form.append("image_generator_version",  "standard");
-  // resolution: (2k) 4k [super_genius only]
-  // genius_preference: anime, photography, graphic, cinematic [genius only]
-  // negative_prompt: string of what is removed from the image
 
-  const res = await fetch(`${DEEPAI_API_ENDPOINT}/text2img`, {
+  if(sound) {
+    prompt = `${prompt}\n\n${sound}`;
+  }
+
+  form.append("text", prompt);
+
+  if(1===1) {
+    console.log(prompt);
+    throw new Error(`Unknown model for music-generator`);
+  }
+
+  const res = await fetch(`${DEEPAI_API_ENDPOINT}/olde`, {
     method: "POST",
     headers: {
       "api-key": DEEPAI_API_KEY,
