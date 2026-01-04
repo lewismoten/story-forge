@@ -17,6 +17,7 @@ import { loadPersona } from "./helpers/loadPersona.mjs";
 import { nowIso } from "./helpers/nowISO.mjs";
 import { uploadImageWithMetadata } from "./images/uploadImageWithMetadata.mjs";
 import { saveStory } from "./helpers/saveStory.mjs";
+import { isoFromStoryPath } from "./helpers/isoFromStoryPath.mjs";
 
 async function main() {
   if (!(await existsA(STORY_DIR))) {
@@ -73,6 +74,11 @@ async function main() {
         console.log(`- Skipping (no feature image)`);
         return;
       }
+
+      story.created_at = isoFromStoryPath(jsonPath); 
+      story.publish_at = story.created_at;
+      saveStory(jsonPath, story);
+
       const alt_text = story.feature_image;
       const title = story.title;
       const meta = {title, alt_text};

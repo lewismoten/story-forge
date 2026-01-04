@@ -4,13 +4,19 @@ export const wordpressApiPost = async (endpointPath, credentials, payload) => {
   const { baseUrl, username, appPassword } = credentials;
   const endpoint = `${baseUrl}${endpointPath}`;
   const Authorization = basicAuthHeader(username, appPassword);
-  const headers = { Authorization };
-  let body;
+  const init = { method: "POST", headers:{ Authorization }, body: void 0 };
   if (payload) {
-    headers["Content-Type"] = "application/json";
-    body = JSON.stringify(payload);
+    init.headers["Content-Type"] = "application/json";
+    init.body = JSON.stringify(payload);
   }
-  const res = await fetch(endpoint, { method: "POST", headers, body });
+  let res;
+  try {
+    res = await fetch(endpoint, init);
+  } catch(e) {
+    console.error('fetch failed', endpoint);
+    //console.log(e);
+    throw e;
+  }
   const text = await res.text();
   let data;
   try {
@@ -21,7 +27,12 @@ export const wordpressApiPost = async (endpointPath, credentials, payload) => {
 
   if (!res.ok) {
     const status = res.status;
-    const code = json?.data?.code ?? '';
+    console.log('status', status);
+    console.log('endpoint', endpoint);
+    console.log('init', init);
+
+    console.error(data);
+    const code = data?.data?.code ?? '';
     throw new Error(`Wordpress API call failed. ${code}`, {
       cause: {
         status,
@@ -32,4 +43,5 @@ export const wordpressApiPost = async (endpointPath, credentials, payload) => {
     });
   }
   return data;
+
 }
