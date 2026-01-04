@@ -14,7 +14,7 @@ export const ensureWordpressTags = async (tags, credentials) => {
       tagIds.push(id);
       continue;
     }
-    id = await ensureWordpressTerm('tags', tag, credentials);
+    id = await ensureWordpressTerm('tags', {name:tag}, credentials);
     tagIds.push(id);
     await wp.setId(tag, id);
   }
