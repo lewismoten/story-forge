@@ -15,16 +15,18 @@ export const postStoryToWordpress =
   let status = isoIsFuture(story.publish_at) ? 'future' : 'publish';
   // if(looksLikeSong(story)) status = 'draft';
 
-  let content = story.story;
+  let content = story.story_html ?? story.story;
 
   // remove lyric markers [Verse] [Bridge]
   content = content.replaceAll(/\s*\[[^\]]*?\]\s*/g, '\n\n');
 
-  if(content.indexOf('</p>') === -1) {
-    content = '<p>' + content.replaceAll(/\n\n/g, '</p><p>' ) + '</p>'; 
+  if(!('story_html' in story)) {
+    if(content.indexOf('</p>') === -1) {
+      content = '<p>' + content.replaceAll(/\n\n/g, '</p><p>' ) + '</p>'; 
+    }
+    content = content.replaceAll(/\n/g, '<br />');
   }
-  content = content.replaceAll(/\n/g, '<br />');
-  content = `<p class="sb-circa">${story.circa_date}</p>`
+  content = `<p class="sb-circa">${story.circa_date}</p>${content}`;
   content += '<p class="sb-publication-meta"><em>' + story.publication_meta + '</em></p>';
 
   const payload = {

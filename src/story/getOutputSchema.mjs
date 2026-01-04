@@ -10,7 +10,7 @@ export const getOutputSchema = () => {
       properties: {
         id: { type: "string", description:"glboally unique id of the story"},
         title: { type: "string", description: "Title of the story targeting 3-6 words with good attraction for interested readers"},
-        story: { type: "string", description: "The story as HTML. HTML may include simple formatting and links to other stories (ie <a href=\"story://id\">)" },
+        story_html: { type: "string", description: "The story as HTML and MUST use paragraph <p> tags. HTML may include simple formatting and links to other stories (ie <a href=\"story://id\">). Image tags may be used where the 'src' attribute is an brief non-formatted image prompt describing what should appear in the image, and should also include 'alt' and 'title' attributes." },
         circa_date: { type: "string", description: "Exact ISO date when story is written from the authors perspective, or a range of two ISO dates, or an estimated period: Circa 1910s or Circa WWII"},
         categories: {
           type: "array",
@@ -44,7 +44,7 @@ export const getOutputSchema = () => {
           required: ["characters", "places", "events", "objects"],
         },
       },
-      required: ["id", "story", "title", "summary", "categories", "tags", "feature_image", 
+      required: ["id", "story_html", "title", "summary", "categories", "tags", "feature_image", 
         "new_facts", "entities", "circa_date", "publication_meta", "story_meta",
         "feature_image_style"],
     },

@@ -19,6 +19,7 @@ import { looksLikeSong } from './audio/looksLikeSong.mjs';
 import { deepaiGenerateAudio } from "./audio/deepaiGenerateAudio.mjs";
 import { promptGenerateAudio } from "./audio/promptGenerateAudio.mjs";
 import { writeText } from "./helpers/writeText.mjs";
+import { htmlAsText } from "./helpers/htmlAsText.mjs";
 
 async function main() {
   if (!(await existsA(STORY_DIR))) {
@@ -72,7 +73,8 @@ async function main() {
         return;
       }
 
-      const prompt = parsed.story;
+      let prompt = ('story_html' in parsed) ? htmlAsText(parsed.story_html) : parsed.story;
+      
       const sound = parsed.story_meta;
       const title = parsed.title;
 

@@ -4,6 +4,6 @@ export const looksLikeSong = (json) => {
   const category = String(json.category || "").trim().toLowerCase();
   if (category === "song lyrics") return true;
 
-  const story = String(json.story || "");
+  const story = String((json.story_html ?? json.story) || "");
   return SONG_TAG_RE.test(story);
 }

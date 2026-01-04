@@ -27,11 +27,6 @@ export const wordpressApiPost = async (endpointPath, credentials, payload) => {
 
   if (!res.ok) {
     const status = res.status;
-    console.log('status', status);
-    console.log('endpoint', endpoint);
-    console.log('init', init);
-
-    console.error(data);
     const code = data?.data?.code ?? '';
     throw new Error(`Wordpress API call failed. ${code}`, {
       cause: {

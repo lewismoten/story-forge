@@ -33,8 +33,8 @@ export const ensureWordpressTerm = async (type, payload, credentials) => {
     const created = await wordpressApiPost(endpointPath, credentials, payload)
     return created.id;
   } catch (e) {
-    if (e.code === 'term_exists') {
-      return e.json.data.term_id;
+    if (e.cause?.data?.code === 'term_exists') {
+      return e.cause.data.data.term_id;
     } else {
       throw e;
     }

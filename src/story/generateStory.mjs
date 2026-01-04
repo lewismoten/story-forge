@@ -17,6 +17,8 @@ import { getOutputSchema} from './getOutputSchema.mjs';
 import { savePersona } from "../helpers/savePersona.mjs";
 import { appendCanon } from "../helpers/appendCanon.mjs";
 import { writeStory } from "../helpers/writeStory.mjs";
+import { htmlAsText } from "../helpers/htmlAsText.mjs";
+import { uuid } from '../helpers/uuid.mjs';
 
 export const generateStory = async ({ personaName, linksCsv }) => {
   initLayout();
@@ -91,6 +93,7 @@ TASK:
 - Continue ongoing characters/places if present; otherwise introduce at most ONE new named entity.
 - Make it feel like it belongs to this persona's timeline bias.
 - Keep it internally consistent.
+- Try to make stories fairly unique to prevent talking about the same thing constantly.
 `.trim();
 
 const schema = getOutputSchema();
@@ -127,20 +130,25 @@ const schema = getOutputSchema();
     return;
   }
 
+  const text = htmlAsText(parsed.story_html);
+  const wordCount = countWords(text || "");
+  const id = uuid();
+  parsed.generator = {
+    id,
+    persona: personaName,
+    created_at: nowIso(),
+    wordCount,
+    text
+  };
+
   // save output;
   writeStory(personaName, parsed);
-
-  // Validate word count and warn (don’t auto-retry to keep it simple)
-  const wc = countWords(parsed.story || "");
-  if (wc < 80 || wc > 120) {
-    console.warn(`Warning: story is ${wc} words (target ~${STORY_WORD_TARGET}).`);
-  }
 
   // Update persona continuity
   persona.previous_response_id = resp.id || persona.previous_response_id;
 
   // Update local persona memory (keep it short)
-  const memLine = `${nowIso()}: ${parsed.summary}`;
+  const memLine = `${nowIso()}:id=${id}: ${parsed.summary}`;
   persona.memory_summaries.push(memLine);
   persona.memory_summaries = persona.memory_summaries.slice(-60);
   savePersona(persona);
@@ -148,14 +156,15 @@ const schema = getOutputSchema();
   // Append shared canon entry
   appendCanon({
     when: nowIso(),
+    id,
     persona: persona.name,
     summary: parsed.summary,
     new_facts: parsed.new_facts || [],
     entities: parsed.entities || { characters: [], places: [], events: [] },
-    word_count: wc,
+    word_count: wordCount,
   });
 
   // Print story + a tiny footer
-  console.log("\n" + parsed.story.trim() + "\n");
-  console.log(`— (${persona.name}) wc=${wc}`);
+  console.log("\n" + parsed.story_html.trim() + "\n");
+  console.log(`— (${persona.name}) wc=${wordCount}`);
 }
