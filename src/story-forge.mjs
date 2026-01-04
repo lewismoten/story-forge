@@ -76,6 +76,7 @@ Examples:
     throw new Error(`Unknown command: ${cmd}`);
   } catch (err) {
     console.error("Error:", err?.message || String(err));
+    console.log(err);
     process.exitCode = 1;
   }
 }
