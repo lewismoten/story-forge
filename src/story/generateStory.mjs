@@ -41,7 +41,7 @@ export const generateStory = async ({ personaName, linksCsv }) => {
     }
   }
 
-  const worldBible = buildWorldBibleText();
+  const worldBible = await buildWorldBibleText();
   const canon = buildCanonText();
 
   const localMemory = persona.memory_summaries.slice(-12).join("\n- ");

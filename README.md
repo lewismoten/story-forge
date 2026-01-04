@@ -16,9 +16,6 @@ generator using OpenAI Responses API.
 - Image Generation (DeepAI)
   - Create images to go along with theme of each story
   - Images created as a batch for stories that are missing images
-
-# In Progress
-
 - Blogging (Wordpress)
   - Upload images as media
   - Post as multiple user accounts
@@ -61,6 +58,9 @@ setx DEEPAI_API_KEY "..."
 
 ### Wordpress
 
+Make sure that the user has a role that is permitted to
+create categories and tags, such "Editor".
+
 Setup an application password.
 
 1. Go to `/wp-admin/` dashboard
@@ -70,7 +70,7 @@ Setup an application password.
 5. Fill out `New Application Password Name`
 6. Click `Add Application Password`
 7. Copy the application password
-8. In the source code, got to your generated personas `/.storyforge/personas/{name}.json`
+8. In the source code, got to your generated personas `/.story-forge/personas/{name}.json`
 9. Add a new `blogs` section with a named key and your credentials
 
 ```json
@@ -102,16 +102,34 @@ application passwords manually.
 Create Stories
 
 ```bash
-node ./src/storyforge.mjs init
-node ./src/storyforge.mjs persona:create "present-prophet"
-node ./src/storyforge.mjs persona:create "present-prophet" "fred"
-node ./src/storyforge.mjs doc:add ./worldbuilding/setting.md
-node ./src/storyforge.mjs link:add "https://example.com/lore-page"
-node ./src/storyforge.mjs story:generate --persona "present-prophet-fred" --links "https://example.com/a,https://example.com/b"
-node ./src/storyforge.mjs story:generate --persona "far-future-historian"
+node ./src/story-forge.mjs init
+node ./src/story-forge.mjs persona:create "present-prophet"
+node ./src/story-forge.mjs persona:create "present-prophet" "fred"
+node ./src/story-forge.mjs doc:add ./worldbuilding/setting.md
+node ./src/story-forge.mjs link:add "https://example.com/lore-page"
+node ./src/story-forge.mjs story:generate --persona "present-prophet-fred" --links "https://example.com/a,https://example.com/b"
+node ./src/story-forge.mjs story:generate --persona "far-future-historian"
 ```
 
 Create images for stories
 ```bash
 node ./src/feature-image.mjs
+```
+
+### Workflow
+```bash
+node ./src/story-forge.mjs init
+node ./src/story-forge.mjs persona:create reporter theo
+node ./src/story-forge.mjs story:generate --persona reporter-theo
+# The rest are done in batches
+node ./src/feature-image.mjs 
+
+#### Stop ####
+# Before you go further, setup your persona with a blog
+# And with the Editor role so that they can create tags/categories
+#
+node ./src/upload-feature-image.mjs
+# if a singer persona, you may want to work on song prompts
+node ./src/music-maker.mjs
+node ./src/upload-post.mjs
 ```

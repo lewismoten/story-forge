@@ -1,7 +1,7 @@
 import { safeSlug } from "../helpers/safeSlug.mjs";
 import { ensureWordpressTags } from "./ensureWordpressTags.mjs";
 import { ensureWordpressCategories } from "./ensureWordpressCategories.mjs";
-import { looksLikeSong} from '../audio/looksLikeSong.mjs';
+// import { looksLikeSong} from '../audio/looksLikeSong.mjs';
 import { isoIsFuture } from '../helpers/isoIsFuture.mjs';
 import { wordpressApiPost } from "./wordpressApiPost.mjs";
 
@@ -13,7 +13,7 @@ export const postStoryToWordpress =
 
   const featured_media = story.blogs?.[blogKey]?.featureImage?.mediaId;  
   let status = isoIsFuture(story.publish_at) ? 'future' : 'publish';
-  if(looksLikeSong(story)) status = 'draft';
+  // if(looksLikeSong(story)) status = 'draft';
 
   const payload = {
     title: story.title,
