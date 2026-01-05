@@ -3,14 +3,13 @@ import process from "process";
 import OpenAI from "openai";
 
 import { MAX_LINK_EXTRACT_CHARS } from "../config/MAX_LINK_EXTRACT_CHARS.mjs";
-import { STORY_WORD_TARGET } from "../config/STORY_WORD_TARGET.mjs";
 
 import { initLayout } from "../helpers/initLayout.mjs";
 import { loadPersona } from "../helpers/loadPersona.mjs";
 import { fetchLinkText } from "../ingestion/fetchLinkText.mjs";
 import { truncate } from "../helpers/truncate.mjs";
-import { buildWorldBibleText } from "./buildWorldBibleText.mjs";
-import { buildCanonText } from "./buildCanonText.mjs";
+import { buildWorldBibleText } from "../world/buildWorldBibleText.mjs";
+import { buildCanonText } from "../world/buildCanonText.mjs";
 import { countWords } from "../helpers/countWords.mjs";
 import { nowIso } from "../helpers/nowISO.mjs";
 import { getOutputSchema} from './getOutputSchema.mjs';
@@ -19,6 +18,7 @@ import { appendCanon } from "../helpers/appendCanon.mjs";
 import { writeStory } from "../helpers/writeStory.mjs";
 import { htmlAsText } from "../helpers/htmlAsText.mjs";
 import { uuid } from '../helpers/uuid.mjs';
+import { pickRandom } from '../helpers/pickRandom.mjs';
 
 export const generateStory = async ({ personaName, linksCsv }) => {
   initLayout();
@@ -49,13 +49,27 @@ export const generateStory = async ({ personaName, linksCsv }) => {
   const localMemory = persona.memory_summaries.slice(-12).join("\n- ");
   const localMemoryBlock = localMemory ? `PERSONA LOCAL MEMORY (most recent)\n- ${localMemory}\n` : "PERSONA LOCAL MEMORY: (none yet)\n";
 
+const framing = pickRandom([
+  'Frame excerpt as emotional',
+  'Frame excerpt as a question',
+  'Frame excerpt with perspective',
+  'Frame excerpt as a theme',
+  'Frame excerpt with world-building implication'
+]);
+const randomTask = pickRandom([true, false]) ? '- Excerpt must not descrbe the scene. It must describe the interpretation.' : '';
+
+const ADDITIONAL_DETAILS = JSON.stringify(persona.additional_details);
+
   // Developer instructions = persona voice + rules
   const dev = `
 You are a distinct narrative persona.
+FIRST_NAME: ${getString(persona.personalization?.first_name)}
+LAST_NAME: ${getString(persona.personalization?.last_name)}
+BIO: ${getString(persona.personalization?.bio)}
 
 ROLE: ${persona.instructions.role}
 STYLE: ${persona.instructions.style}
-TIMELINE BIAS: ${persona.instructions.timelineBias}
+TIMELINE BIAS: ${persona.instructions.timeline_bias}
 SCOPE_OF_TRUTH: ${persona.instructions.scope_of_truth}
 ALLOWED_CONTRIBUTIONS: ${persona.instructions.allowed_contributions}
 STORY_FORMATS: ${persona.instructions.story_formats}
@@ -66,6 +80,8 @@ ${persona.instructions.hard_rules.map(r => `- ${r}`).join("\n")}
 CROSS-PERSONA:
 - enabled: ${persona.crossPersona?.enabled ? "yes" : "no"}
 - borrowStrength: ${persona.crossPersona?.borrowStrength || "medium"}
+
+ADDITIONAL_DETAILS: ${ADDITIONAL_DETAILS}
 
 Output MUST be JSON only, matching the schema.
 `.trim();
@@ -90,10 +106,12 @@ ${adHoc ? `AD HOC LINKS\n${adHoc}\n` : "AD HOC LINKS: (none)\n"}
 
 TASK:
 - Write a complete story with a beginning, turn, and a clean last line.
+- ${framing}
+${randomTask}
 - Continue ongoing characters/places if present; otherwise introduce at most ONE new named entity.
 - Make it feel like it belongs to this persona's timeline bias.
 - Keep it internally consistent.
-- Try to make stories fairly unique to prevent talking about the same thing constantly.
+- Make if feel like its a different story compared to prior stories.
 `.trim();
 
 const schema = getOutputSchema();
@@ -167,4 +185,10 @@ const schema = getOutputSchema();
   // Print story + a tiny footer
   console.log("\n" + parsed.story_html.trim() + "\n");
   console.log(`— (${persona.name}) wc=${wordCount}`);
+}
+
+const getString = (text, defaultText = '') => {
+  if(typeof text !== 'string') return defaultText;
+  let trimmed = text.trim();
+  return trimmed.length === 0 ? defaultText : trimmed;
 }

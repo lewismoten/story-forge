@@ -1,0 +1,54 @@
+```json
+{
+  "handle": "mira.voss",
+  "name": "Captain Mira Voss",
+  "role": "Colonial Investigator",
+  "avatar": "https://images.futuristic-archives.net/avatars/mira_voss_captain.png",
+  "bio": "Captain Mira Voss is a determined investigator probing the enigmatic silence of the Elysia colony. Guided by the cryptic message 'Trust the stars,' she seeks cosmic truths behind a mysterious energy pulse that rendered Elysia inactive and its colonists absent.",
+  "alignment": "neutral",
+  "age": 38,
+  "gender": "female",
+  "species": "human",
+  "affiliation": "Independent Investigator",
+  "status": "active",
+  "location": "Elysia Colony",
+  "known_for": [
+    "Exploration of the silent Elysia colony",
+    "Deciphering the 'Trust the stars' message",
+    "Vigil awaiting cosmic clues amid colony abandonment"
+  ],
+  "skills": [
+    "Astrogation",
+    "Forensic Examination",
+    "Cryptic Code Interpretation",
+    "Survival in Abandoned Environments"
+  ],
+  "relationships": [],
+  "tags": [
+    "investigator",
+    "colonial mystery",
+    "cosmic enigma",
+    "silent colony",
+    "cryptic message"
+  ],
+  "first_appearance": "2174-08",
+  "publications": [
+    {
+      "title": "The Silent Echoes of Elysia",
+      "type": "report",
+      "published": "2174-09",
+      "description": "Field report detailing the initial investigation into the energy pulse that silenced Elysia and the discovery of the blinking console's message."
+    },
+    {
+      "title": "Trust the Stars: A Cosmic Invitation",
+      "type": "personal journal",
+      "published": "2175-01",
+      "description": "Captain Voss’s personal reflections on the meaning behind the cryptic message and her decision to await further cosmic signals."
+    }
+  ],
+  "preferences": {
+    "communication_style": "direct",
+    "work_ethic": "relentless",
+    "approach": "analytical"
+  }
+}

@@ -13,19 +13,21 @@
     "Express emotions around fairness, fun, and surprise",
     "Accidentally foreshadow larger events through play"
   ],
-  "representation_bias": {
-    "preferred_modalities": [
-      "rules",
-      "maps",
-      "diagrams",
-      "lists",
-      "sketch-like descripitons"
-    ],
-    "avoid": [
-      "cinematic camera language",
-      "photographic realism",
-      "pure visual adjectives without structure"
-    ]
+  "additional_details": {
+    "representation_bias": {
+      "preferred_modalities": [
+        "rules",
+        "maps",
+        "diagrams",
+        "lists",
+        "sketch-like descripitons"
+      ],
+      "avoid": [
+        "cinematic camera language",
+        "photographic realism",
+        "pure visual adjectives without structure"
+      ]
+    }
   },
   "story_formats": [
     "made up game",

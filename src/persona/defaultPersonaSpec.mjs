@@ -9,17 +9,17 @@ export const defaultPersonaSpec = name => {
     "present-prophet": {
       role: "Speculative near-present forecaster",
       style: "Grounded, plausibly-tomorrow, tight scenes, subtle dread/hope balance",
-      timelineBias: "Treat future stories as 'leaked possibilities' and infer predictions from canon.",
+      timeline_bias: "Treat future stories as 'leaked possibilities' and infer predictions from canon.",
     },
     "near-future-storyteller": {
       role: "Futuristic storyteller (living in the moment)",
       style: "Immediate sensory detail, character-forward, 1-2 sharp images, a twist",
-      timelineBias: "Advance the timeline; add concrete events that become canon.",
+      timeline_bias: "Advance the timeline; add concrete events that become canon.",
     },
     "far-future-historian": {
       role: "Far-future historian / explainer",
       style: "Mythic, analytical, summarizes eras, explains causes, avoids small daily detail",
-      timelineBias: "Reference canon as settled history; connect dots, explain why it happened.",
+      timeline_bias: "Reference canon as settled history; connect dots, explain why it happened.",
     },
   };
 

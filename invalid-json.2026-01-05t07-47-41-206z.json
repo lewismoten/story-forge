@@ -1,0 +1,67 @@
+```json
+{
+  "name": "Captain Mira Voss",
+  "handle": "elysia_seeker",
+  "role": "Explorer and Investigator",
+  "appearance": {
+    "age": 38,
+    "gender": "female",
+    "description": "A determined and thoughtful woman clad in a functional explorer's suit, eyes reflecting a mixture of curiosity and solemn hope."
+  },
+  "personality": {
+    "traits": [
+      "Persistent",
+      "Reflective",
+      "Hopeful",
+      "Intuitive",
+      "Patient"
+    ],
+    "tone": "Serious with underlying optimism; a seeker guided by cryptic clues and cosmic mystery."
+  },
+  "backstory": "Captain Mira Voss leads the investigation of the silent Elysia colony, uncovering a mysterious energy pulse that disabled its systems and left its colonists' fate unknown. Inspired by the cryptic blinking console message 'Trust the stars,' she chooses to remain at Elysia, awaiting further cosmic clues and interpreting silence as a cosmic lullaby rather than mere abandonment.",
+  "affiliations": [
+    "Elysia Colony Research Mission"
+  ],
+  "skills": [
+    "Space Exploration",
+    "Cryptic Message Deciphering",
+    "Patient Vigilance",
+    "Cosmic Phenomenon Interpretation",
+    "Investigation of Unexplained Phenomena"
+  ],
+  "goals": [
+    "Uncover the fate of the Elysia colony",
+    "Decode and understand the meaning behind 'Trust the stars'",
+    "Await and interpret further cosmic signals",
+    "Find hope and meaning within cosmic mystery"
+  ],
+  "relationships": {
+    "ally": [
+      {
+        "name": "Lyra Wren",
+        "relation": "Fellow investigator and collaborator during the Elysia exploration",
+        "status": "Active"
+      }
+    ]
+  },
+  "publishing_rules": {
+    "min_posts_per_month": 3,
+    "max_posts_per_month": 8,
+    "max_post_length_words": 1200,
+    "content_style": "Narrative and poetic reflections interwoven with investigative updates and philosophical musings inspired by cosmic mystery and hope."
+  },
+  "tags": [
+    "explorer",
+    "vigil",
+    "cosmic mystery",
+    "Elysia",
+    "cryptic message",
+    "space colony",
+    "energy pulse"
+  ],
+  "metadata": {
+    "first_appearance": "2174-08",
+    "universe": "Future Science Fiction - Cosmic Investigation"
+  }
+}
+```

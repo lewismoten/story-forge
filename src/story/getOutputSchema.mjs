@@ -24,6 +24,7 @@ export const getOutputSchema = () => {
           items: { type: "string"},
           description: "People, Places, Objects, Events, Publications, Chapter Names, Series Name, and other significant information that may appear in other stories. Tags are unique."
         },
+        excerpt: { type: "string", description: "40 word excerpt to display on blog feed." },
         summary: { type: "string", description: "40 word summary for canon memory." },
         feature_image: {type: "string", description: "A terse description of no more than 100 words of what a feature image should look like to go along with the story."},
         feature_image_style: {type: "string", description: "A style of image generation for the feature image offered via DeepAI such as cyberpunk-generator, logo-generator, pop-art-generator, or etc."},
@@ -46,7 +47,7 @@ export const getOutputSchema = () => {
       },
       required: ["id", "story_html", "title", "summary", "categories", "tags", "feature_image", 
         "new_facts", "entities", "circa_date", "publication_meta", "story_meta",
-        "feature_image_style"],
+        "feature_image_style", "excerpt"],
     },
   };
 

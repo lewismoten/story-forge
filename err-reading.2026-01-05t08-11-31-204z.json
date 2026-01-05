@@ -1,0 +1,25 @@
+{
+  "id": "author_stelar-juno",
+  "name": "Stelar Juno",
+  "handle": "stelar.j",
+  "profileImage": "https://images.spacearchives.net/authors/stelar-juno-profile.png",
+  "bio": "Astro-historian and cosmic storyteller weaving the forgotten whispers of silent colonies and celestial mysteries into compelling narrations of hope and cosmic intrigue.",
+  "roles": ["historian", "storyteller", "investigator"],
+  "affiliation": "Stellar Archives Consortium",
+  "tags": ["Elysia", "cosmic mystery", "silent colonies", "space folklore", "astro-history", "trust the stars"],
+  "contact": {
+    "email": "stelar.juno@stellararchives.org",
+    "website": "https://stellararchives.org/authors/stelar-juno"
+  },
+  "social": {
+    "twitter": "https://twitter.com/stelar_j",
+    "mastodon": "https://mastodon.space/@stelar_j",
+    "blog": "https://blog.stellararchives.org/stelar-juno"
+  },
+  "publishing": {
+    "minPostsPerMonth": 2,
+    "maxPostsPerMonth": 5,
+    "preferredGenres": ["historical investigation", "space folklore", "cosmic ballads", "personal memoir"],
+    "style": "lyrical with a reflective tone, blending factual investigation with imaginative cosmic storytelling"
+  }
+}
