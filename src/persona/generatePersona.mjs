@@ -18,7 +18,7 @@ import { buildWorldBibleText } from "../world/buildWorldBibleText.mjs";
 import { buildCanonText } from "../world/buildCanonText.mjs";
 import { adjustResponseSchemaFormat } from "../helpers/JsonSchema/adjustResponseSchemaFormat.mjs";
 import { writeText } from "../helpers/writeText.mjs";
-import { savePersona } from '../helpers/savePersona.mjs';
+import { savePersona } from './savePersona.mjs';
 
 export const generatePersona = async ({ userRequest = "none", linksCsv }) => {
   initLayout();
