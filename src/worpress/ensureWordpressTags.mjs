@@ -1,5 +1,5 @@
 import { wpTags } from "./wordpressTags.mjs";
-import { ensureWordpressTerm } from "./ensureWordpressTerm.mjs";
+import { ensureWordpressTerm } from "../story/ensureWordpressTerm.mjs";
 import { insensitiveUniqueReducer } from '../helpers/insensitiveUniqueReducer.mjs';
 
 export const ensureWordpressTags = async (tags, credentials) => {
